@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Set Reminder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>Medication Reminder</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="reminder.html" class="active">Reminder</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact Us</a>
+    </nav>
+</header>
+
+<section class="container">
+    <h2>Set Your Medicine Reminder</h2>
+
+    <form class="form-box" id="reminderform">
+        <label>Medicine Name:</label>
+        <input type="text" placeholder="Enter medicine name" required id="name">
+
+        <label>Dosage:</label>
+        <input type="text" placeholder="e.g., 1 tablet" required id="Dosage">
+
+        <label>Time:</label>
+        <input type="time" required id="time">
+
+        <label>Start Date:</label>
+        <input type="date" required id="date">
+
+        <label>Number To Contact For Reminder:</label>
+        <input type="text" required id="num">
+
+        <button type="submit" class="btn" id="submit">Save Reminder</button>
+    </form>
+</section>
+
+<script>
+document.getElementById("reminderform").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    let data = {
+        name: document.getElementById("name").value,
+        time: document.getElementById("time").value,
+        date: document.getElementById("date").value,
+        dose: document.getElementById("Dosage").value,
+        number: document.getElementById("num").value,
+         
+    };
+
+    fetch("https://script.google.com/macros/s/AKfycbxXzx1j1LcNmcWgeKlxubtmooqYXh_FWRjLl3QMAN0ke9_nrfVtCqN95A5WHU9bMC1b/exec",{
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(() => {
+        alert("Reminder Set Succesfully");
+        document.getElementById("reminderForm").reset();
+    })
+    
+});
+</script>
+
+<footer>
+    © 2025 | Designed by Gurcharan & Kaushik
+</footer>
+
+</body>
+</html>
